@@ -1,0 +1,101 @@
+$segment-size: 100px;
+$segment-thickness: 12px;
+$segment-offset: 4px;
+
+@mixin segment-color($color) 
+{
+    &.a { border-top-color: $color; }
+    &.b, &.c { border-left-color: $color; }
+    &.d 
+    {
+      border-bottom-color: $color;
+      &::after { border-top-color: $color !important; }
+    }
+    &.e, &.f { border-right-color: $color; }
+    &.g { border-bottom-color: $color; }
+}
+
+.holder
+{
+    position: relative;
+    width: $segment-size + 2 * $segment-offset;
+    height: 2 * $segment-size + 4 * $segment-offset + 2 * $segment-thickness;
+    padding: 12px;
+    margin: 10px;
+}
+
+.segment
+{
+    position: absolute;
+    background-color: transparent;
+    border: $segment-thickness solid transparent;
+    border-radius: 5px;
+    
+    @include segment-color(var(--color-off));
+
+    &.on
+    {
+        @include segment-color(var(--color-on));
+    }
+    
+    &.a // TOP
+    { 
+        width: $segment-size; 
+        height: 0; 
+        top: 0; left: $segment-offset; 
+    } 
+    
+    &.b // LEFTUP
+    { 
+        width: 0; 
+        height: $segment-size;
+        top: $segment-offset; left: 0; 
+    }
+    
+    &.c // LEFTDN
+    { 
+        width: 0; 
+        height: $segment-size;
+        top: $segment-size + 2 * $segment-thickness + 3 * $segment-offset; left: 0;
+    }
+    
+    &.d // MID
+    { 
+        width: $segment-size; 
+        height: 0;
+        top: $segment-size + 2 * $segment-offset; left: $segment-offset;
+        border-radius: 0;
+    
+        &::after // Custom solution for 'middle' segment - cosmetic, makes it look more realistic.
+        {
+            content: '';
+            position: absolute;
+            top: $segment-thickness;
+            left: -$segment-thickness;
+            width: $segment-size;
+            height: 0;
+            border: $segment-thickness solid transparent;
+        }
+    }
+    
+    &.e // RIGHTUP
+    { 
+        width: 0; 
+        height: $segment-size;
+        top: $segment-offset; left: $segment-size + 2 * $segment-offset;
+    }
+    
+    &.f // RGHTDN
+    {
+        width: 0; 
+        height: $segment-size;
+        top: $segment-size + 2 * $segment-thickness + 3 * $segment-offset; left: $segment-size + 2 * $segment-offset;
+    }
+    
+    &.g // BOTTOM
+    { 
+        width: $segment-size; 
+        height: 0;
+        top: 2 * $segment-size + 2 * $segment-thickness + 4 * $segment-offset; left: $segment-offset;
+    }
+}
