@@ -41,13 +41,14 @@ export class ClockComponent implements OnInit {
     console.log(time);
     let splitTime = time.split(":");
     this.hour = splitTime[0];
-    if(this.hourFormat === 'h' || this.hourFormat === 'H') // add 'empty' digit
+    if( (this.hourFormat === 'h' || this.hourFormat === 'H') && parseInt(this.hour) < 10) // add 'empty' digit
     {
       this.hour = "N" + this.hour;
     }
-
+    
+    console.log(this.hour)
     this.minutes = splitTime[1];
-    if(this.minutesFormat === 'm') // add 'empty' digit
+    if(this.minutesFormat === 'm' && parseInt(this.minutes) < 10) // add 'empty' digit
     {
       this.minutes = "N" + this.minutes;
     }
