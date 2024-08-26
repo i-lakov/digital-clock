@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './digit.component.scss'
 })
 export class DigitComponent {
-  @Input() displayDigit = "10";
+  @Input() displayDigit = "E";
 
   segmentDefinition: any = {
     //  TOP LEFTUP LEFTDN  MID RGHTUP RGHTDN BOTTOM
@@ -28,6 +28,6 @@ export class DigitComponent {
 
   getIsSegmentOn(index: number): string
   {
-    return this.segmentDefinition[this.displayDigit][index] ? "on" : "";
+    return this.displayDigit && this.segmentDefinition[this.displayDigit][index] ? "on" : "";
   }
 }

@@ -5,7 +5,7 @@ import { DelimiterDotsComponent } from '../delimiter-dots/delimiter-dots.compone
 import { AmpmComponent } from '../ampm/ampm.component';
 
 @Component({
-  selector: 'app-clock',
+  selector: 'digital-clock',
   standalone: true,
   imports: [DigitComponent, DelimiterDotsComponent, DatePipe, AmpmComponent],
   templateUrl: './clock.component.html',
@@ -38,7 +38,6 @@ export class ClockComponent implements OnInit {
 
   assignTime(time: string): void
   {
-    console.log(time);
     let splitTime = time.split(":");
     this.hour = splitTime[0];
     if( (this.hourFormat === 'h' || this.hourFormat === 'H') && parseInt(this.hour) < 10) // add 'empty' digit
@@ -46,7 +45,6 @@ export class ClockComponent implements OnInit {
       this.hour = "N" + this.hour;
     }
     
-    console.log(this.hour)
     this.minutes = splitTime[1];
     if(this.minutesFormat === 'm' && parseInt(this.minutes) < 10) // add 'empty' digit
     {
